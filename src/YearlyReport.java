@@ -29,15 +29,47 @@ public class YearlyReport {
         }
     }
 
-    public Integer getProfit(int month) {
+    public int getProfit(int month) {
         return incomeByMonth.get(month) - expensesByMonth.get(month);
     }
 
-    public Integer getExpense(int month) {
+    public int getIncomes(int month) {
+        return incomeByMonth.get(month);
+    }
+
+    public int getExpense(int month) {
         return expensesByMonth.get(month);
     }
 
-    public void printReport() {
+    public int sumOfExpenses() {
+        int expSum = 0;
+        for (int i = 0; i < expensesByMonth.size(); i++) {
+            if (expensesByMonth.containsKey(i+1)) {
+                expSum += expensesByMonth.get(i+1);
+            }
+        }
 
+        return expSum;
+    }
+
+    public int sumOfIncome() {
+        int incomeSum = 0;
+        for (int i = 0; i < incomeByMonth.size(); i++) {
+            if (incomeByMonth.containsKey(i+1)) {
+                incomeSum += incomeByMonth.get(i+1);
+            }
+        }
+
+        return incomeSum;
+    }
+
+    public void printReport() {
+        System.out.println(yearNumber);
+        for (int i = 0; i < incomeByMonth.size(); i++) {
+            System.out.println("Прибыль за " + (i+1) + " месяц года: " + getProfit(i+1));
+        }
+
+        System.out.println("Средний расход за все месяцы в году: " + sumOfExpenses()/expensesByMonth.size());
+        System.out.println("Средний доход за все месяцы в году: " + sumOfIncome()/incomeByMonth.size());
     }
 }
