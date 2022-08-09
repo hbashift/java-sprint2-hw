@@ -1,12 +1,9 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-
-
         ArrayList<MonthlyReport> monthlyReportList = new ArrayList<>();
 
         YearlyData yearlyData = new YearlyData();
@@ -32,7 +29,7 @@ public class Main {
                         monthDataArrayList.add(monthData);
                     }
                     monthlyReport.setMonthData(monthDataArrayList);
-                    monthlyReport.setMonthName(i);
+                    monthlyReport.setMonthNumber(i);
                     monthlyReportList.add(monthlyReport);
                 }
             }else if (command == 2) {
