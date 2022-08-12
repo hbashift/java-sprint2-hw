@@ -16,42 +16,30 @@ public class Main {
         int command = scanner.nextInt();
 
         while (true) {
-            if (command == 1) {
-                ArrayList<String[]> reports = reader.readMonthlyReports();
-                for (int i = 0; i < reports.size(); i++) {
-                    MonthlyReport monthlyReport = new MonthlyReport();
-                    ArrayList<MonthData> monthDataArrayList = new ArrayList<>();
-                    String[] line = reports.get(i);
-                    for (int j = 1; j < line.length; j++) {
-                        MonthData monthData = new MonthData();
-                        String[] lineContents = line[j].split(",");
-                        monthData.setMonthData(lineContents);
-                        monthDataArrayList.add(monthData);
-                    }
-                    monthlyReport.setMonthData(monthDataArrayList);
-                    monthlyReport.setMonthNumber(i);
-                    monthlyReportList.add(monthlyReport);
-                }
-            }else if (command == 2) {
-                String[] reports = reader.readYearlyReport();
-                for (int i = 1; i < reports.length; i++) {
-                    String[] reportContent = reports[i].split(",");
-                    yearlyData.setYearlyData(reportContent);
-                    yearlyReport.addRecord(yearlyData.month, yearlyData.amount, yearlyData.isExpense);
-                }
-            } else if (command == 3) {
-                CheckReports.checkExpenses(monthlyReportList, yearlyReport);
-                CheckReports.checkIncomes(monthlyReportList, yearlyReport);
-            } else if (command == 4) {
-                for (MonthlyReport report : monthlyReportList) {
-                    report.printReport();
-                }
-            } else if (command == 5) {
-                yearlyReport.printReport();
-            } else if (command == 777){
-                break;
-            }
 
+            switch (command) {
+                case 1:
+                    Menu.readMonthlyReports(reader, monthlyReportList);
+                    break;
+                case 2:
+                    Menu.readYearlyReports(reader, yearlyData, yearlyReport);
+                    break;
+                case 3:
+                    CheckReports.checkExpenses(monthlyReportList, yearlyReport);
+                    CheckReports.checkIncomes(monthlyReportList, yearlyReport);
+                    break;
+                case 4:
+                    Menu.printMonthlyReport(monthlyReportList);
+                    break;
+                case 5:
+                    yearlyReport.printReport();
+                    break;
+                case 777:
+                    System.exit(0);
+                default:
+                    System.out.println("Такой команды не существует. Ввод некорректен.");
+                    break;
+            }
 
             Menu.printMenu();
             command = scanner.nextInt();

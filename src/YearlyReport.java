@@ -52,6 +52,10 @@ public class YearlyReport {
         return expSum;
     }
 
+    public int getSize() {
+        return incomeByMonth.size();
+    }
+
     public int sumOfIncome() {
         int incomeSum = 0;
         for (int i = 0; i < incomeByMonth.size(); i++) {
@@ -64,6 +68,11 @@ public class YearlyReport {
     }
 
     public void printReport() {
+        if (getSize() == 0) {
+            System.out.println("Годовой отчет не был прочтён");
+            return;
+        }
+
         System.out.println(yearNumber);
         for (int i = 0; i < incomeByMonth.size(); i++) {
             System.out.println("Прибыль за " + (i+1) + " месяц года: " + getProfit(i+1));
