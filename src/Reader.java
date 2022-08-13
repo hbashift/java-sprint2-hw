@@ -19,7 +19,8 @@ public class Reader {
         for (int i = 1; i < 4; i++) {
             if (parseReport("resources/m.20210" + i + ".csv") == null) {
                 System.out.println("Невозможно прочитать файл с отчётом. Возможно, файл не находится в нужной директории.");
-                System.exit(0);
+                reports = null;
+                break;
             } else {
                 reports.add(parseReport("resources/m.20210" + i + ".csv"));
             }
@@ -30,7 +31,6 @@ public class Reader {
     public String[] parseYearlyReport() {
         if (parseReport("resources/y.2021.csv") == null) {
             System.out.println("Невозможно прочитать файл с отчётом. Возможно, файл не находится в нужной директории.");
-            System.exit(0);
             return null;
         } else {
             return parseReport("resources/y.2021.csv");

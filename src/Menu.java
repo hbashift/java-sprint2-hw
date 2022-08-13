@@ -12,6 +12,9 @@ public class Menu {
 
     public static void readMonthlyReports(Reader reader, ArrayList<MonthlyReport> monthlyReportList) {
         ArrayList<String[]> reports = reader.parseMonthlyReports();
+        if (reports == null) {
+            return;
+        }
         for (int i = 0; i < reports.size(); i++) {
             MonthlyReport monthlyReport = new MonthlyReport();
             ArrayList<MonthData> monthDataArrayList = new ArrayList<>();
@@ -30,6 +33,9 @@ public class Menu {
 
     public static void readYearlyReports(Reader reader, YearlyData yearlyData, YearlyReport yearlyReport) {
         String[] reports = reader.parseYearlyReport();
+        if (reports == null) {
+            return;
+        }
         for (int i = 1; i < reports.length; i++) {
             String[] reportContent = reports[i].split(",");
             yearlyData.setYearlyData(reportContent);
